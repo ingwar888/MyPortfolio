@@ -1,0 +1,77 @@
+/* Основной контейнер навигации */
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgb(10, 10, 10);
+  backdrop-filter: blur(12px);
+  padding: 0.1 rem 0;
+  position: sticky;
+  margin-top: 10px;
+  z-index: 300;
+  margin-left: -60px; 
+}
+
+/* Список ссылок */
+.navList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 1.9rem;
+  flex-wrap: wrap
+}
+
+/* Элемент списка */
+.navItem {
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Ссылка */
+.navLink {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #c0ac3d;
+  border-color: transparent;
+}
+
+/* Активная ссылка */
+.navLink.active {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+/* Анимированное подчёркивание (золотая линия) */
+.activeIndicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd700, #f5a623);
+  border-radius: 2px;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  .navList {
+    gap: 1.2rem;
+  }
+  .navLink {
+    font-size: 0.95rem;
+  }
+}
