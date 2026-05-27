@@ -10,18 +10,21 @@ const projects = [
     description: 'Написано на C# c использованием Entity Framework и базой данных SQLite',
     tech: ['C#', 'Entity Framework','SQLite','Windows Forms','Visual Studio 2022'],
     github: 'https://github.com/ingwar888/NODE_app_v.1.0',
+    image: '/images/projects/node1.png',
   },
   {
     title: '"Викторина" - игра - приложение',
     description: 'Моё первое консольное приложение, написанное на C++ с использованием различных инструментов (библиотек (Windows.h), функций, условных операторов и др.)',
     tech: ['С++', 'Visual Studio 2022'],
     github: 'https://github.com/ingwar888/Victorina-Game',
+    image: '/images/projects/victorina1.png',
   },
   {
     title: 'Текстовый редактор',
     description: 'Прикладное приложение для удобной работы с текстом, написанное на C# и использующее Windows Forms',
     tech: ['C#', 'Windows Forms','Visual Studio 2022'],
     github: 'https://github.com/ingwar888/Text-editor-v1',
+    image: '/images/projects/editor1.png',
   },
 ];
 
@@ -79,11 +82,6 @@ const GeometricShapes = () => {
   );
 };
 
-// Сканирующая линия
-const ScanLine = () => {
-  return <div className={styles.scanLine} />;
-};
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -108,7 +106,6 @@ export default function ProjectsPage() {
       {/* Фоновые эффекты */}
       <FloatingParticles />
       <GeometricShapes />
-      <ScanLine />
 
       <div className={styles.headerSection}>
         <motion.h1 
@@ -142,39 +139,52 @@ export default function ProjectsPage() {
             variants={projectVariants}
             whileHover={{ y: -10 }}
           >
-            <div className={styles.cardHeader}>
-              <h3 className={styles.projectTitle}>{project.title}</h3>
-            </div>
-            <p className={styles.description}>{project.description}</p>
-            <div className={styles.techStack}>
-              {project.tech.map((t, techIndex) => (
-                <motion.span 
-                  key={t} 
-                  className={styles.tech}
-                  variants={techVariants}
-                  initial="hidden"
-                  animate="visible"
-                  transition={{ delay: 0.3 + index * 0.15 + techIndex * 0.05 }}
-                  whileHover={{ 
-                    scale: 1.1,
-                    transition: { type: "spring", stiffness: 300 }
-                  }}
+            {/* Фоновое изображение - появляется при наведении */}
+            <div 
+              className={styles.projectBgImage}
+              style={{ backgroundImage: `url(${project.image})` }}
+            />
+            
+            {/* Затемняющий оверлей */}
+            <div className={styles.projectBgOverlay} />
+
+            {/* Контент карточки */}
+            <div className={styles.cardContent}>
+              <div className={styles.cardHeader}>
+                <h3 className={styles.projectTitle}>{project.title}</h3>
+              </div>
+              <p className={styles.description}>{project.description}</p>
+              <div className={styles.techStack}>
+                {project.tech.map((t, techIndex) => (
+                  <motion.span 
+                    key={t} 
+                    className={styles.tech}
+                    variants={techVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.3 + index * 0.15 + techIndex * 0.05 }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      transition: { type: "spring", stiffness: 300 }
+                    }}
+                  >
+                    {t}
+                  </motion.span>
+                ))}
+              </div>
+              <div className={styles.links}>
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.githubLink}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  {t}
-                </motion.span>
-              ))}
-            </div>
-            <div className={styles.links}>
-              <motion.a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.githubLink}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>GitHub</span>
-              </motion.a>
+                  <span>GitHub</span>
+                </motion.a>
+              </div>
             </div>
           </motion.div>
         ))}

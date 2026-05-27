@@ -6,34 +6,34 @@ import styles from './skillpage.module.css';
 
 const skills = {
   languages: [
-    { name: 'C#', level: 85, icon: '#>', color: '#9B4D96' },
-    { name: 'C++', level: 80, icon: '++', color: '#00599C' },
-    { name: 'Python', level: 40, icon: 'def', color: '#3776AB' },
+    { name: 'C#', level: 85, icon: '#>', color: '#cc40c3' },
+    { name: 'C++', level: 80, icon: '++', color: '#3e9be2' },
+    { name: 'Python', level: 40, icon: 'def', color: '#924dec' },
     { name: 'GO', level: 15, icon: '>>', color: '#00ADD8' },
     { name: 'HTML', level: 55, icon: '</>', color: '#E34F26' },
-    { name: 'CSS', level: 75, icon: '#.', color: '#1572B6' },
+    { name: 'CSS', level: 75, icon: '#.', color: '#27a0f7' },
     { name: 'JavaScript', level: 25, icon: '()=>', color: '#F7DF1E' },
-    { name: 'TypeScript', level: 25, icon: '<>', color: '#3178C6' },
+    { name: 'TypeScript', level: 25, icon: '<>', color: '#1e86f7' },
     { name: 'SQL', level: 80, icon: '[]', color: '#CC2927' },
   ],
   frameworks: [
-    { name: '.NET / ADO.NET', level: 80, icon: '.N', color: '#512BD4' },
-    { name: 'Entity Framework', level: 90, icon: 'EF', color: '#512BD4' },
-    { name: 'ASP.NET', level: 25, icon: 'AS', color: '#512BD4' },
-    { name: 'Next.js', level: 35, icon: 'NX', color: '#000000' }
+    { name: '.NET / ADO.NET', level: 80, icon: '.N', color: '#2aa1e6' },
+    { name: 'Entity Framework', level: 90, icon: 'EF', color: '#924dec' },
+    { name: 'ASP.NET', level: 25, icon: 'AS', color: '#F7DF1E' },
+    { name: 'Next.js', level: 35, icon: 'NX', color: '#FF6B6B' }
   ],
   tools: [
     { name: 'Git / GitHub', level: 50, icon: '$>', color: '#F05032' },
-    { name: 'Visual Studio', level: 95, icon: '>_', color: '#5C2D91' },
-    { name: 'DB Browser', level: 75, icon: '=>', color: '#4479A1' },
-    { name: 'MS SQL Server', level: 60, icon: '|>', color: '#CC2927' },
+    { name: 'Visual Studio', level: 95, icon: '>_', color: '#924dec' },
+    { name: 'DB Browser', level: 75, icon: '=>', color: '#2aa1e6' },
+    { name: 'MS SQL Server', level: 60, icon: '|>', color: '#F7DF1E' },
     { name: 'StarUML', level: 80, icon: '#>', color: '#FF6B6B' },
   ],
   databases: [
-    { name: 'SQLite', level: 90, icon: 'SL', color: '#003B57' },
-    { name: 'Microsoft SQL', level: 80, icon: 'MS', color: '#CC2927' },
-    { name: 'PostgreSQL', level: 25, icon: 'PG', color: '#336791' },
-    { name: 'MySQL', level: 25, icon: 'MY', color: '#4479A1' },
+    { name: 'SQLite', level: 90, icon: 'SL', color: '#FF6B6B' },
+    { name: 'Microsoft SQL', level: 80, icon: 'MS', color: '#F7DF1E' },
+    { name: 'PostgreSQL', level: 25, icon: 'PG', color: '#924dec' },
+    { name: 'MySQL', level: 25, icon: 'MY', color: '#57a5e0' },
     { name: 'Oracle', level: 20, icon: 'OR', color: '#F80000' },
   ],
 };
@@ -92,20 +92,154 @@ const GeometricShapes = () => {
   );
 };
 
-// Сканирующая линия
-const ScanLine = () => {
-  return <div className={styles.scanLine} />;
+// Эффект 1: Код на C#
+const CSharpCodeEffect = () => {
+  const codeLines = [
+    { text: '<span class="keyword">using</span> <span class="className">System</span>;', type: 'code' },
+    { text: '<span class="keyword">using</span> <span class="className">System.Linq</span>;', type: 'code' },
+    { text: '', type: 'empty' },
+    { text: '<span class="keyword">namespace</span> <span class="className">MyApp</span>', type: 'code' },
+    { text: '{', type: 'bracket' },
+    { text: '  <span class="keyword">public class</span> <span class="className">Program</span>', type: 'code' },
+    { text: '  {', type: 'bracket' },
+    { text: '    <span class="keyword">static void</span> <span class="method">Main</span>()', type: 'code' },
+    { text: '    {', type: 'bracket' },
+    { text: '      <span class="comment">// TODO: Add logic</span>', type: 'comment' },
+  ];
+
+  return (
+    <div className={styles.codeBackground}>
+      {codeLines.map((line, index) => (
+        <div 
+          key={index} 
+          className={styles.codeLine}
+          dangerouslySetInnerHTML={{ __html: line.text || '&nbsp;' }}
+        />
+      ))}
+    </div>
+  );
 };
 
-// Карточка категории с эффектом 3D-параллакса
+// Эффект 2: Проект ASP.NET
+const AspNetProjectEffect = () => {
+  return (
+    <div className={styles.projectBackground}>
+      <div className={styles.projectStructure}>
+        <div className={styles.projectFile}>
+          <span className={styles.folder}>📁 Controllers/</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.file}>  ├── HomeController</span><span className={styles.fileExt}>.cs</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.file}>  ├── ApiController</span><span className={styles.fileExt}>.cs</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.folder}>📁 Models/</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.file}>  ├── UserModel</span><span className={styles.fileExt}>.cs</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.folder}>📁 Views/</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.file}>  ├── Index</span><span className={styles.fileExt}>.cshtml</span>
+        </div>
+        <div className={styles.projectFile}>
+          <span className={styles.file}>  └── _Layout</span><span className={styles.fileExt}>.cshtml</span>
+        </div>
+      </div>
+      <div className={styles.buildingBadge}>● Building...</div>
+    </div>
+  );
+};
+
+// Эффект 3: Git/GitHub
+const GitWorkEffect = () => {
+  return (
+    <div className={styles.gitBackground}>
+      <div className={styles.terminal}>
+        <div className={styles.terminalLine}>
+          <span className={styles.prompt}>$ </span>
+          <span className={styles.gitCommand}>git init</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.gitSuccess}>Initialized empty Git repository</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.prompt}>$ </span>
+          <span className={styles.gitCommand}>git add .</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.prompt}>$ </span>
+          <span className={styles.gitCommand}>git commit -m</span>
+          <span className={styles.string}> "initial commit"</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.prompt}>$ </span>
+          <span className={styles.gitCommand}>git branch</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.gitBranch}>* main</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.prompt}>$ </span>
+          <span className={styles.gitCommand}>git push origin main</span>
+        </div>
+        <div className={styles.terminalLine}>
+          <span className={styles.gitSuccess}>Everything up-to-date</span>
+        </div>
+      </div>
+      <div className={styles.commitHash}>🔗 a1b2c3d</div>
+    </div>
+  );
+};
+
+// Эффект 4: SQL запросы
+const SqlQueryEffect = () => {
+  return (
+    <div className={styles.databaseBackground}>
+      <div className={styles.sqlCode}>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>SELECT</span> <span className={styles.sqlTable}>*</span>
+        </div>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>FROM</span> <span className={styles.sqlTable}>users</span>
+        </div>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>WHERE</span> <span className={styles.sqlTable}>age</span> {'>'} <span className={styles.sqlNumber}>18</span>
+        </div>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>ORDER BY</span> <span className={styles.sqlTable}>name</span>
+        </div>
+        <div className={styles.sqlLine}>&nbsp;</div>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>INSERT INTO</span> <span className={styles.sqlTable}>users</span>
+        </div>
+        <div className={styles.sqlLine}>
+          (<span className={styles.sqlTable}>name</span>, <span className={styles.sqlTable}>email</span>)
+        </div>
+        <div className={styles.sqlLine}>
+          <span className={styles.sqlKeyword}>VALUES</span> (<span className={styles.sqlString}>'Igor'</span>, <span className={styles.sqlString}>'email@mail.ru'</span>)
+        </div>
+      </div>
+      <div className={styles.tableIcon}>🗄️</div>
+    </div>
+  );
+};
+
+// Карточка категории
 const SkillCategory = ({ 
   title, 
   skills, 
-  delay 
+  delay,
+  effectType 
 }: { 
   title: string; 
   skills: Array<{ name: string; level: number; icon: string; color: string }>;
   delay: number;
+  effectType: 'csharp' | 'aspnet' | 'git' | 'sql';
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -133,6 +267,21 @@ const SkillCategory = ({
     y.set(0);
   };
 
+  const renderEffect = () => {
+    switch (effectType) {
+      case 'csharp':
+        return <CSharpCodeEffect />;
+      case 'aspnet':
+        return <AspNetProjectEffect />;
+      case 'git':
+        return <GitWorkEffect />;
+      case 'sql':
+        return <SqlQueryEffect />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <motion.div
       ref={cardRef}
@@ -151,6 +300,9 @@ const SkillCategory = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Индивидуальный эффект */}
+      {renderEffect()}
+
       <h2 className={styles.categoryTitle}>{title}</h2>
       
       {skills.map((skill, index) => (
@@ -208,12 +360,9 @@ const SkillCategory = ({
 export default function SkillPage() {
   return (
     <div className={styles.page}>
-      {/* Фоновые эффекты */}
       <FloatingParticles />
       <GeometricShapes />
-      <ScanLine />
 
-      {/* Основной контент */}
       <motion.div
         className={styles.hero}
         initial={{ opacity: 0 }}
@@ -248,21 +397,25 @@ export default function SkillPage() {
           title="Языки" 
           skills={skills.languages}
           delay={0.3}
+          effectType="csharp"
         />
         <SkillCategory 
           title="Фреймворки" 
           skills={skills.frameworks}
           delay={0.5}
+          effectType="aspnet"
         />
         <SkillCategory 
           title="Инструменты" 
           skills={skills.tools}
           delay={0.7}
+          effectType="git"
         />
         <SkillCategory 
           title="СУБД" 
           skills={skills.databases}
           delay={0.9}
+          effectType="sql"
         />
       </div>
     </div>

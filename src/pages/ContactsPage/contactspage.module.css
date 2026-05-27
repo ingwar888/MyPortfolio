@@ -1,12 +1,158 @@
 .page {
   min-height: 94vh;
-  background: linear-gradient(145deg, #0a0a0a 0%, #121212 100%);
+  background: #000000;
+  padding: 2rem 2rem 10rem;
+  font-family: 'Inter', 'JetBrains Mono', system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0rem 2rem 5rem;
-  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Геометрическая сетка */
+.page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridPulse 15s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Неоновые круги */
+.page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 20%, #8240ce88 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, #c9af217e 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #f5a5238a 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Плавающие частицы */
+.particlesContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #702cbe;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #702cbe;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Геометрические фигуры на фоне */
+.geometricShapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border: 2px solid #702cbe;
+  animation: shapeRotate 20s linear infinite;
+}
+
+.shape:nth-child(1) {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 10%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  border-color: #f5a623;
+  animation-duration: 25s;
+}
+
+.shape:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 15%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  border-color: #702cbe;
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+.shape:nth-child(3) {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  left: 20%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border: none;
+  background: #702cbe;
+  animation-duration: 20s;
+}
+
+@keyframes shapeRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* Контент поверх фона */
+.hero, 
+.contactsGrid,
+.extraNote {
+  position: relative;
+  z-index: 1;
 }
 
 .hero {
@@ -15,6 +161,9 @@
 }
 
 .title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  color: transparent;
   background: linear-gradient(
     100deg,
     #702cbe,
@@ -27,30 +176,44 @@
     #ffd700,
     #702cbe
   );
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  background-size: 400% 100%;
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: smoothShimmer 10s ease-in-out infinite;
+  animation: neonGradient 15s ease-in-out infinite;
+  margin-bottom: 20px;
+  text-shadow: none;
+  filter: drop-shadow(0 0 20px #cc8e2a8a);
 }
 
-@keyframes smoothShimmer {
-  0% {
+@keyframes neonGradient {
+  0%, 100% {
     background-position: 0% 50%;
   }
   50% {
     background-position: 100% 50%;
   }
-  100% {
-    background-position: 200% 50%;
-  }
 }
 
 .subtitle {
   font-size: 1.4rem;
-  color: #b0b0b0;
+  color: rgb(255, 255, 255);
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.subtitle::before,
+.subtitle::after {
+  content: '// ';
+  color: #f5a623;
+  opacity: 0.7;
+}
+
+.subtitle::after {
+  content: ' //';
 }
 
 .contactsGrid {
@@ -58,98 +221,417 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 4rem;
-  margin-bottom: 5rem;
+  gap: 3rem;
+  margin-bottom: 4rem;
 }
 
 .contactCard {
   background: rgb(0, 0, 0);
-  backdrop-filter: blur(8px);
-  border-radius: 32px;
-  padding: 2rem 1.5rem;
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
   text-align: center;
   text-decoration: none;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  transition: all 0.3s ease;
+  border: 2px solid #7f3eca9f;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  clip-path: polygon(
+    0% 15px, 
+    15px 0%, 
+    calc(100% - 15px) 0%, 
+    100% 15px, 
+    100% calc(100% - 15px), 
+    calc(100% - 15px) 100%, 
+    15px 100%, 
+    0% calc(100% - 15px)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Чат-фон */
+.chatBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.contactCard:hover .chatBackground {
+  opacity: 1;
+}
+
+/* Сообщения чата */
+.chatMessage {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.contactCard:hover .chatMessage {
+  animation: chatAppear 0.5s ease-out forwards;
+}
+
+.chatMessage.received {
+  align-self: flex-start;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #e0e0e0;
+  border-bottom-left-radius: 5px;
+}
+
+.chatMessage.sent {
+  align-self: flex-end;
+  background: rgba(112, 44, 190, 0.3);
+  border: 1px solid rgba(112, 44, 190, 0.4);
+  color: #ffffff;
+  border-bottom-right-radius: 5px;
+}
+
+.chatMessage:nth-child(1) { animation-delay: 0.1s; }
+.chatMessage:nth-child(2) { animation-delay: 0.4s; }
+.chatMessage:nth-child(3) { animation-delay: 0.7s; }
+.chatMessage:nth-child(4) { animation-delay: 1s; }
+.chatMessage:nth-child(5) { animation-delay: 1.3s; }
+.chatMessage:nth-child(6) { animation-delay: 1.6s; }
+
+@keyframes chatAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Печатная машинка */
+.typewriter {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: 'JetBrains Mono', monospace;
+  color: #8b5cf6;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #8b5cf6;
+  width: 0;
+}
+
+.contactCard:hover .typewriter {
+  opacity: 1;
+  animation: typing 2s steps(20) infinite, blink 0.5s step-end infinite alternate;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 180px; }
+  100% { width: 0; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Печатающийся текст */
+.typingText {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(139, 92, 246, 0.6);
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
+
+.contactCard:hover .typingText {
+  opacity: 1;
+  animation: fadeText 3s ease-in-out infinite;
+}
+
+@keyframes fadeText {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* Линии соединения */
+.connectionLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.connectionDot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #8b5cf6;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 8px #8b5cf6;
+}
+
+.contactCard:hover .connectionDot {
+  animation: connectPulse 1.5s ease-in-out infinite;
+}
+
+.connectionDot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.connectionDot:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.3s; }
+.connectionDot:nth-child(3) { top: 50%; left: 20%; animation-delay: 0.6s; }
+.connectionDot:nth-child(4) { top: 60%; right: 10%; animation-delay: 0.9s; }
+.connectionDot:nth-child(5) { top: 40%; left: 50%; animation-delay: 1.2s; }
+
+@keyframes connectPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(2.5);
+    box-shadow: 0 0 15px #8b5cf6, 0 0 30px #8b5cf6;
+  }
+}
+
+/* Цифровые волны */
+.digitalWave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.contactCard:hover .digitalWave {
+  opacity: 1;
+}
+
+.waveBar {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to top, #8b5cf6, transparent);
+  animation: waveJump 1s ease-in-out infinite;
+}
+
+.waveBar:nth-child(1) { left: 5%; animation-delay: 0s; height: 15px; }
+.waveBar:nth-child(2) { left: 15%; animation-delay: 0.1s; height: 25px; }
+.waveBar:nth-child(3) { left: 25%; animation-delay: 0.2s; height: 10px; }
+.waveBar:nth-child(4) { left: 35%; animation-delay: 0.3s; height: 30px; }
+.waveBar:nth-child(5) { left: 45%; animation-delay: 0.4s; height: 20px; }
+.waveBar:nth-child(6) { left: 55%; animation-delay: 0.5s; height: 15px; }
+.waveBar:nth-child(7) { left: 65%; animation-delay: 0.6s; height: 28px; }
+.waveBar:nth-child(8) { left: 75%; animation-delay: 0.7s; height: 18px; }
+.waveBar:nth-child(9) { left: 85%; animation-delay: 0.8s; height: 22px; }
+.waveBar:nth-child(10) { left: 95%; animation-delay: 0.9s; height: 12px; }
+
+@keyframes waveJump {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.8); }
 }
 
 .contactCard::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15), transparent);
-  transition: left 0.6s;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255, 215, 0, 0.1),
+    transparent 25%
+  );
+  animation: borderRotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
 }
 
 .contactCard:hover::before {
-  left: 100%;
+  opacity: 1;
+}
+
+@keyframes borderRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.contactCard::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: rgba(10, 10, 20, 0.9);
+  border-radius: 18px;
+  z-index: 0;
 }
 
 .contactCard:hover {
-  border-color: #702cbe;
-  box-shadow: 0 10px 10px 10px rgb(97, 94, 94);
-  background: rgb(0, 0, 0);
+  transform: translateY(-10px);
+  border-color: #8b5cf6;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(139, 92, 246, 0.2),
+    inset 0 0 30px rgba(139, 92, 246, 0.05);
 }
 
 .contactIcon {
   font-size: 3rem;
   display: block;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.contactCard:hover .contactIcon {
+  filter: drop-shadow(0 0 20px #702cbe);
+  transform: scale(1.1);
 }
 
 .contactType {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #702cbe;
-  margin-bottom: 0.5rem;
+  color: #8b5cf6;
+  margin-bottom: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.contactCard:hover .contactType {
+  color: #a78bfa;
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
 }
 
 .contactValue {
   font-size: 0.9rem;
-  color: #cccccc;
+  color: #ffffff;
   word-break: break-all;
   margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
 }
 
 .arrow {
   font-size: 1.5rem;
   color: #ffd700;
   display: inline-block;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .contactCard:hover .arrow {
   transform: translateX(5px);
+  color: #f5a623;
+  text-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+}
+
+.contactCard:hover .contactValue {
+  animation: digitalNoise 0.3s ease;
+}
+
+@keyframes digitalNoise {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
 }
 
 .extraNote {
   text-align: center;
-  color: #aaa;
+  color: #ffffff;
   font-size: 0.9rem;
-  border-top: 1px dashed rgba(255, 215, 0, 0.3);
+  border-top: 1px solid #702cbe;
   padding-top: 2rem;
   max-width: 500px;
   margin: 0 auto;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  position: relative;
 }
 
-.GitHubS{
+.GitHubS {
   height: 60px;
   width: 60px;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 600px) {
+.contactCard:hover .GitHubS {
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+  transform: scale(1.1);
+}
+
+.Vkontakte {
+  height: 50px;
+  width: 50px;
+  filter: drop-shadow(0 0 10px rgba(112, 44, 190, 0.3));
+  transition: all 0.3s ease;
+}
+
+.contactCard:hover .Vkontakte {
+  filter: drop-shadow(0 0 20px rgba(112, 44, 190, 0.6));
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
   .page {
-    padding: 5rem 1.5rem 4rem;
+    padding: 4rem 1rem 4rem;
   }
+  
+  .contactsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
   .contactCard {
     padding: 1.5rem;
   }
+  
+  .title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
   .contactIcon {
     font-size: 2.5rem;
   }
