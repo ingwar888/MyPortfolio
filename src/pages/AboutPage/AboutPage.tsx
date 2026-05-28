@@ -17,6 +17,29 @@ export default function AboutPage() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <div className={styles.photoGlow}>
+            {/* Сияющие орбы */}
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            <div className={styles.glowOrb} />
+            
+            {/* Сияющие линии */}
+            <div className={styles.glowLine} />
+            <div className={styles.glowLine} />
+            <div className={styles.glowLine} />
+            <div className={styles.glowLine} />
+            
+            {/* Искры */}
+            <div className={styles.spark} />
+            <div className={styles.spark} />
+            <div className={styles.spark} />
+            <div className={styles.spark} />
+            <div className={styles.spark} />
+
             <div className={styles.photoFrame}>
               <img
                 src="/images/FinalMyPhoto.jpg"
@@ -82,7 +105,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            <span className={styles.quoteIcon}>“</span>
+            <span className={styles.quoteIcon}>"</span>
             <p>Код — это поэзия, написанная для машин и людей.</p>
           </motion.div>
 
