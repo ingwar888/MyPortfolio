@@ -88,8 +88,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 113%;
-  height: 113%;
+  width: 100%;
+  height: 110%;
   pointer-events: none;
   z-index: 0;
 }
@@ -104,7 +104,7 @@
   width: 200px;
   height: 200px;
   top: 10%;
-  left: 13%;
+  left: 10%;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   border-color: #f5a623;
   animation-duration: 25s;
@@ -113,10 +113,10 @@
 .shape:nth-child(2) {
   width: 150px;
   height: 150px;
-  top: 65%;
+  top: 60%;
   right: 15%;
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  border-color: #7700ff;
+  border-color: #702cbe;
   animation-duration: 30s;
   animation-direction: reverse;
 }
@@ -222,11 +222,13 @@
 }
 
 .projectCard {
-  position: relative;
+  background: rgb(0, 0, 0);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
-  border: 1px solid #702cbe;
+  border: 2px solid #702cbe;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
   overflow: hidden;
   clip-path: polygon(
     0% 15px, 
@@ -241,63 +243,72 @@
   display: flex;
   flex-direction: column;
   min-height: 350px;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
 }
 
-/* Слой с фоновым изображением */
-.projectBgImage {
+.projectCard::after {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 0;
-  transform: scale(1.1);
-}
-
-.projectCard:hover .projectBgImage {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Темный оверлей поверх изображения */
-.projectBgOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 1;
-  transition: background 0.5s ease;
-}
-
-.projectCard:hover .projectBgOverlay {
-  background: rgba(0, 0, 0, 0.5);
+  inset: 2px;
+  background: rgb(0, 0, 0);
+  border-radius: 18px;
+  z-index: -1;
 }
 
 .projectCard:hover {
-  transform: translateY(-10px);
   border-color: #ffd700;
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 215, 0, 0.2),
-    inset 0 0 30px rgba(255, 215, 0, 0.05);
+    0 0 30px rgba(0, 255, 255, 0.1),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
 }
 
-/* Контент карточки */
-.cardContent {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+/* Сканирующая линия */
+.scannerLine {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.8),
+    0 0 30px rgba(255, 255, 255, 0.4),
+    0 0 60px rgba(255, 255, 255, 0.2);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.projectCard:hover .scannerLine {
+  opacity: 1;
+  animation: scanDown 2.5s ease-in-out infinite;
+}
+
+@keyframes scanDown {
+  0% {
+    top: -3px;
+  }
+  25% {
+    top: 50%;
+  }
+  50% {
+    top: 100%;
+  }
+  75% {
+    top: 50%;
+  }
+  100% {
+    top: -3px;
+  }
 }
 
 .cardHeader {
@@ -306,36 +317,31 @@
 }
 
 .projectTitle {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #8b5cf6;  /* ← Измените на фиолетовый */
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 1.4;
-  transition: all 0.3s ease;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 10px;
+  background: #f5a623;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.projectCard:hover .projectTitle {
-  color: #ffd700;
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+@keyframes dotPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #702cbe, 0 0 20px #f5a623;
+  }
+  50% {
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #702cbe;
+  }
 }
 
 .description {
-  color: #e0e0e0;
+  color: #ffffff;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 1rem;
   flex-grow: 1;
-  transition: color 0.3s ease;
-}
-
-.projectCard:hover .description {
-  color: rgb(255, 251, 0);
-  text-shadow: 5px 5px 5px rgba(153, 0, 255, 0.801);
 }
 
 .techStack {
@@ -349,19 +355,12 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   padding: 0.3rem 0.8rem;
-  background: rgba(112, 44, 190, 0.2);
-  border: 1px solid rgba(112, 44, 190, 0.4);
-  border-radius: 6px;
+  background: rgb(0, 0, 0);
+  border: 1px solid #702cbe;
+  border-radius: 30px;
   color: #ffd700;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-.projectCard:hover .tech {
-  background: #ffffff9d;
-  border-color: #0078D4;
-  color:#000000;
 }
 
 .tech:hover {
@@ -383,7 +382,7 @@
   padding: 0.8rem 1.8rem;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 215, 0, 0.4);
-  border-radius: 8px;
+  border-radius: 40px;
   color: #ffd700;
   text-decoration: none;
   font-family: 'JetBrains Mono', monospace;
@@ -393,8 +392,6 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
 }
 
 .githubLink::before {
@@ -419,7 +416,7 @@
 
 .githubLink:hover {
   background: rgba(112, 44, 190, 0.5);
-  border-color: #ffd700;
+  border-color: #ffffff;
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 
@@ -427,34 +424,7 @@
     0 0 30px rgba(255, 215, 0, 0.3);
 }
 
-/* Индикатор скриншота */
-.screenshotHint {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  border-radius: 8px;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 4;
-  color: #ffd700;
-  font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  pointer-events: none;
-}
-
-.projectCard:hover .screenshotHint {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Цифровой шум при наведении */
+/* Цифровой шум при наведении на карточку */
 .projectCard:hover .tech {
   animation: digitalNoise 0.3s ease;
 }

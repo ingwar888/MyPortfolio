@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
 import styles from './projectpage.module.css';
 
 const projects = [
@@ -10,21 +10,18 @@ const projects = [
     description: 'Написано на C# c использованием Entity Framework и базой данных SQLite',
     tech: ['C#', 'Entity Framework','SQLite','Windows Forms','Visual Studio 2022'],
     github: 'https://github.com/ingwar888/NODE_app_v.1.0',
-    image: '/images/projects/node1.png',
   },
   {
     title: '"Викторина" - игра - приложение',
     description: 'Моё первое консольное приложение, написанное на C++ с использованием различных инструментов (библиотек (Windows.h), функций, условных операторов и др.)',
     tech: ['С++', 'Visual Studio 2022'],
     github: 'https://github.com/ingwar888/Victorina-Game',
-    image: '/images/projects/victorina1.png',
   },
   {
     title: 'Текстовый редактор',
     description: 'Прикладное приложение для удобной работы с текстом, написанное на C# и использующее Windows Forms',
     tech: ['C#', 'Windows Forms','Visual Studio 2022'],
     github: 'https://github.com/ingwar888/Text-editor-v1',
-    image: '/images/projects/editor1.png',
   },
 ];
 
@@ -82,113 +79,121 @@ const GeometricShapes = () => {
   );
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
+// Карточка проекта
+const ProjectCard = ({ 
+  project, 
+  index 
+}: { 
+  project: { title: string; description: string; tech: string[]; github: string };
+  index: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springX = useSpring(x, { stiffness: 100, damping: 30 });
+  const springY = useSpring(y, { stiffness: 100, damping: 30 });
 
-const projectVariants = {
-  hidden: { y: 50, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
-};
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const rotateX = (e.clientY - centerY) / 20;
+    const rotateY = (centerX - e.clientX) / 20;
+    x.set(rotateX);
+    y.set(rotateY);
+  };
 
-const techVariants = {
-  hidden: { scale: 0, opacity: 0 },
-  visible: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 200 } },
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className={styles.projectCard}
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.2 + index * 0.15, ease: [0.4, 0, 0.2, 1] }}
+      style={{ rotateX: springX, rotateY: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ y: -10 }}
+    >
+      {/* Сканирующая линия */}
+      <div className={styles.scannerLine} />
+      
+      <div className={styles.cardHeader}>
+        <h3 className={styles.projectTitle}>{project.title}</h3>
+      </div>
+      <p className={styles.description}>{project.description}</p>
+      <div className={styles.techStack}>
+        {project.tech.map((t, techIndex) => (
+          <motion.span 
+            key={t} 
+            className={styles.tech}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.5 + index * 0.15 + techIndex * 0.05 }}
+            whileHover={{ scale: 1.1 }}
+          >
+            {t}
+          </motion.span>
+        ))}
+      </div>
+      <div className={styles.links}>
+        <motion.a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.githubLink}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span>GitHub</span>
+        </motion.a>
+      </div>
+    </motion.div>
+  );
 };
 
 export default function ProjectsPage() {
   return (
     <div className={styles.page}>
-      {/* Фоновые эффекты */}
       <FloatingParticles />
       <GeometricShapes />
-
-      <div className={styles.headerSection}>
+      
+      <motion.div 
+        className={styles.headerSection}
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 1 }}
+      >
         <motion.h1 
           className={styles.title}
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: -50 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
         >
           Мои проекты
         </motion.h1>
         <motion.p 
           className={styles.subtitle}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           Реальные решения, которые были мной разработаны
         </motion.p>
-      </div>
-
-      <motion.div
-        className={styles.projectsGrid}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.title}
-            className={styles.projectCard}
-            variants={projectVariants}
-            whileHover={{ y: -10 }}
-          >
-            {/* Фоновое изображение - появляется при наведении */}
-            <div 
-              className={styles.projectBgImage}
-              style={{ backgroundImage: `url(${project.image})` }}
-            />
-            
-            {/* Затемняющий оверлей */}
-            <div className={styles.projectBgOverlay} />
-
-            {/* Контент карточки */}
-            <div className={styles.cardContent}>
-              <div className={styles.cardHeader}>
-                <h3 className={styles.projectTitle}>{project.title}</h3>
-              </div>
-              <p className={styles.description}>{project.description}</p>
-              <div className={styles.techStack}>
-                {project.tech.map((t, techIndex) => (
-                  <motion.span 
-                    key={t} 
-                    className={styles.tech}
-                    variants={techVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 0.3 + index * 0.15 + techIndex * 0.05 }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      transition: { type: "spring", stiffness: 300 }
-                    }}
-                  >
-                    {t}
-                  </motion.span>
-                ))}
-              </div>
-              <div className={styles.links}>
-                <motion.a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.githubLink}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span>GitHub</span>
-                </motion.a>
-              </div>
-            </div>
-          </motion.div>
-        ))}
       </motion.div>
+
+      <div className={styles.projectsGrid}>
+        {projects.map((project, index) => (
+          <ProjectCard key={project.title} project={project} index={index} />
+        ))}
+      </div>
     </div>
   );
 }

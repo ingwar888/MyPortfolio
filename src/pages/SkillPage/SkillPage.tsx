@@ -9,18 +9,17 @@ const skills = {
     { name: 'C#', level: 85, icon: '#>', color: '#cc40c3' },
     { name: 'C++', level: 80, icon: '++', color: '#3e9be2' },
     { name: 'Python', level: 40, icon: 'def', color: '#924dec' },
-    { name: 'GO', level: 15, icon: '>>', color: '#00ADD8' },
     { name: 'HTML', level: 55, icon: '</>', color: '#E34F26' },
-    { name: 'CSS', level: 75, icon: '#.', color: '#27a0f7' },
-    { name: 'JavaScript', level: 25, icon: '()=>', color: '#F7DF1E' },
+    { name: 'CSS', level: 75, icon: '#.', color: '#F7DF1E' },
     { name: 'TypeScript', level: 25, icon: '<>', color: '#1e86f7' },
     { name: 'SQL', level: 80, icon: '[]', color: '#CC2927' },
   ],
   frameworks: [
-    { name: '.NET / ADO.NET', level: 80, icon: '.N', color: '#2aa1e6' },
-    { name: 'Entity Framework', level: 90, icon: 'EF', color: '#924dec' },
+    { name: '.NET / ADO.NET', level: 80, icon: '.N', color: '#924dec' },
+    { name: 'Entity Framework', level: 90, icon: 'EF', color: '#3e9be2' },
     { name: 'ASP.NET', level: 25, icon: 'AS', color: '#F7DF1E' },
-    { name: 'Next.js', level: 35, icon: 'NX', color: '#FF6B6B' }
+    { name: 'Next.js', level: 35, icon: 'NX', color: '#FF6B6B' },
+    { name: 'Vite', level: 35, icon: 'VT', color: '#924dec' }
   ],
   tools: [
     { name: 'Git / GitHub', level: 50, icon: '$>', color: '#F05032' },

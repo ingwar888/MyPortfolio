@@ -222,7 +222,7 @@
 }
 
 .category {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(0, 0, 0);
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
@@ -246,7 +246,7 @@
   content: '';
   position: absolute;
   inset: 2px;
-  background: rgba(10, 10, 20, 0.9);
+  background: rgb(0, 0, 0);
   border-radius: 18px;
   z-index: -1;
 }
