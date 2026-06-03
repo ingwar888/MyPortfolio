@@ -466,3 +466,315 @@
     font-size: 1.1rem;
   }
 }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modalContent {
+  background: rgb(10, 10, 15);
+  border: 2px solid #702cbe;
+  border-radius: 24px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 
+    0 0 50px rgba(112, 44, 190, 0.3),
+    0 0 100px rgba(112, 44, 190, 0.1),
+    0 20px 60px rgba(0, 0, 0, 0.8);
+  padding: 2.5rem;
+}
+
+.modalContent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    #702cbe,
+    #ffd700,
+    #f5a623,
+    #702cbe
+  );
+  background-size: 300% 300%;
+  animation: borderGlow 3s ease-in-out infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Кнопка закрытия */
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(112, 44, 190, 0.2);
+  border: 1px solid #702cbe;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffd700;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(112, 44, 190, 0.5);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(112, 44, 190, 0.5);
+  transform: rotate(90deg);
+}
+
+/* Заголовок модального окна */
+.modalHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modalTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffd700, #f5a623);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.modalDescription {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Слайд-шоу */
+.slideshowContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(112, 44, 190, 0.3);
+}
+
+.slideshowWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(112, 44, 190, 0.1);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Кнопки навигации */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #702cbe;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffd700;
+  transition: all 0.3s ease;
+  z-index: 5;
+  backdrop-filter: blur(5px);
+}
+
+.navButton:hover {
+  background: rgba(112, 44, 190, 0.5);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(112, 44, 190, 0.5);
+}
+
+.prevButton {
+  left: 1rem;
+}
+
+.nextButton {
+  right: 1rem;
+}
+
+/* Индикаторы точек */
+.dotsContainer {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 5;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+.activeDot {
+  background: #ffd700;
+  border-color: #ffd700;
+  box-shadow: 0 0 10px #ffd700;
+  transform: scale(1.2);
+}
+
+/* Сообщение о отсутствии изображений */
+.noImages {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.noImages span {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.noImages p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Стек технологий в модальном окне */
+.modalTechStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.modalTech {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  background: rgba(112, 44, 190, 0.2);
+  border: 1px solid #702cbe;
+  border-radius: 30px;
+  color: #ffd700;
+  letter-spacing: 0.5px;
+}
+
+/* Добавляем указатель курсора для карточек */
+.projectCard {
+  cursor: pointer;
+}
+
+/* Стили для скроллбара в модальном окне */
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: #702cbe;
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: #ffd700;
+}
+
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 1rem;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+    max-height: 95vh;
+  }
+  
+  .modalTitle {
+    font-size: 1.3rem;
+  }
+  
+  .navButton {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .slideshowContainer {
+    aspect-ratio: 4 / 3;
+  }
+}
