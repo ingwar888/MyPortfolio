@@ -2,15 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import PageMeta from '../../components/Seo/PageMeta';
+import { seoPages } from '../../entities/seo/seoConfig';
 import styles from './contactspage.module.css';
 import github from '../../../public/images/github.png'
 import vk from '../../../public/images/vk.png'
 
 const contacts = [
   {
-    type: 'Email',
+    type: 'Почта (Mail)',
     value: 'p0penko.igor@yandex.ru',
-    link: 'mailto:your.email@example.com',
+    link: 'mailto:p0penko.igor@yandex.ru',
     icon: '✉️',
     chatMessages: [
       { text: 'Привет! ✋', type: 'received' },
@@ -24,7 +26,7 @@ const contacts = [
     typingLabel: '✉️ Печатает...',
   },
   {
-    type: 'GitHub',
+    type: 'GitHub (Гитхаб)',
     value: 'ingwar888',
     link: 'https://github.com/ingwar888',
     icon: <img src={github} alt="GitHub" className={styles.GitHubS} />,
@@ -40,7 +42,7 @@ const contacts = [
     typingLabel: '💻 Коммитит...',
   },
   {
-    type: 'VKontakte',
+    type: 'ВКонтакте',
     value: 'ing.war888',
     link: 'https://m.vk.com/ing.war888',
     icon: <img src={vk} alt="VKontakte" className={styles.Vkontakte} />,
@@ -135,6 +137,12 @@ const cardVariants = {
 export default function ContactsPage() {
   return (
     <div className={styles.page}>
+      <PageMeta
+        title={seoPages.contact.title}
+        description={seoPages.contact.description}
+        path={seoPages.contact.path}
+        keywords={seoPages.contact.keywords}
+      />
       <FloatingParticles />
       <GeometricShapes />
 
@@ -144,9 +152,10 @@ export default function ContactsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h1 className={styles.title}>Свяжитесь со мной</h1>
+        <h1 className={styles.title}>На связи</h1>
         <p className={styles.subtitle}>
-          Всегда открыт для новых идей и предложений
+          Смотреть контакты: mail, GitHub (гитхаб) и ВКонтакте — открыт к идеям и
+          созданию проекта
         </p>
       </motion.div>
 
@@ -232,7 +241,9 @@ export default function ContactsPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.8 }}
       >
-        <p>Или напишите мне прямо сейчас — отвечу в течение дня!</p>
+        <p>
+          Напишите на mail или в соцсети — разработчик Игорь ответит в течение дня.
+        </p>
       </motion.div>
     </div>
   );

@@ -1,11 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import PageMeta from '../../components/Seo/PageMeta';
+import { seoPages } from '../../entities/seo/seoConfig';
 import styles from './aboutpage.module.css';
 
 export default function AboutPage() {
   return (
     <div className={styles.page}>
+      <PageMeta
+        title={seoPages.about.title}
+        description={seoPages.about.description}
+        path={seoPages.about.path}
+        keywords={seoPages.about.keywords}
+      />
       <div className={styles.bgOrb} />
       <div className={styles.bgOrb2} />
 
@@ -43,7 +51,7 @@ export default function AboutPage() {
             <div className={styles.photoFrame}>
               <img
                 src="/images/FinalMyPhoto.jpg"
-                alt="Моё фото"
+                alt="Игорь — разработчик приложений, фото для раздела обо мне"
                 className={styles.photo}
               />
               <div className={styles.photoShine} />
@@ -73,12 +81,13 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              Привет! Меня зовут Игорь. Я{' '}
+              Привет! Меня зовут Игорь — если вы искали «кто я», то я{' '}
               <strong className={styles.highlight}>
-                backend-разработчик
+                разработчик приложений
               </strong>{' '}
-              с опытом создания надёжных и масштабируемых систем на{' '}
-              <strong>C# / .NET</strong> и на других инструментах.
+              и backend-специалист. Создаю надёжные системы на{' '}
+              <strong>C# / .NET</strong>, работаю с базой данных, Python и другими
+              инструментами.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

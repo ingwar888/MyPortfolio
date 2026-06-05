@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import PageMeta from '../../components/Seo/PageMeta';
+import { seoPages } from '../../entities/seo/seoConfig';
 import styles from './homepage.module.css';
 
 // Параметры частиц
@@ -109,10 +112,14 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-      {/* Canvas фон */}
-      <canvas ref={canvasRef} className={styles.canvas} />
+      <PageMeta
+        title={seoPages.home.title}
+        description={seoPages.home.description}
+        path={seoPages.home.path}
+        keywords={seoPages.home.keywords}
+      />
+      <canvas ref={canvasRef} className={styles.canvas} aria-hidden />
 
-      {/* Контент */}
       <motion.div
         className={styles.content}
         variants={containerVariants}
@@ -120,21 +127,21 @@ export default function HomePage() {
         animate="visible"
       >
         <motion.div className={styles.badge} variants={itemVariants}>
-          <span className={styles.badgeText}>C# - .NET - ADO.NET - Entity</span>
+          <span className={styles.badgeText}>C# · .NET · Python · Entity Framework</span>
         </motion.div>
 
         <motion.h1
           className={`${styles.title} ${styles.shimmerTitle}`}
           variants={itemVariants}
         >
-          Создаю надёжные
+          Разработчик
           <br />
-          backend-решения
+          приложений и решений
         </motion.h1>
 
         <motion.p className={styles.subtitle} variants={itemVariants}>
-          Разработчик C# с фокусом на производительность, чистую архитектуру
-          и впечатляющий пользовательский опыт. Превращаю сложные задачи в элегантный код.
+          Создание проектов и прикладных приложений на C#/.NET и Python.
+          Превращаю сложные задачи в надёжные backend-решения с чистой архитектурой.
         </motion.p>
 
         <motion.div className={styles.buttonGroup} variants={itemVariants}>
@@ -143,7 +150,9 @@ export default function HomePage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
           >
-            <a href="/projects" className={styles.ForLinkText}>Мои проекты</a>
+            <Link to="/projects" className={styles.ForLinkText}>
+              Проектная работа
+            </Link>
           </motion.button>
 
           <motion.button
@@ -151,7 +160,9 @@ export default function HomePage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
           >
-            <a href="/contact" className={styles.ForLinkTextC}>Связаться</a>
+            <Link to="/contact" className={styles.ForLinkTextC}>
+              Смотреть контакты
+            </Link>
           </motion.button>
         </motion.div>
       </motion.div>

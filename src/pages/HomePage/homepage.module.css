@@ -53,8 +53,8 @@
 
 /* Заголовок */
 .title {
-  font-size: clamp(5.5rem, 8vw, 4.9rem);
-  font-weight: 1000;
+  font-size: clamp(5.0rem, 8vw, 4.9rem);
+  font-weight: 800;
   line-height: 1.7;
   margin-bottom: 1.0rem;
   letter-spacing: -0.02em;

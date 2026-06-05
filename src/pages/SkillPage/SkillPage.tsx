@@ -2,6 +2,8 @@
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
+import PageMeta from '../../components/Seo/PageMeta';
+import { seoPages } from '../../entities/seo/seoConfig';
 import styles from './skillpage.module.css';
 
 const skills = {
@@ -171,6 +173,12 @@ const SkillCategory = ({
 export default function SkillPage() {
   return (
     <div className={styles.page}>
+      <PageMeta
+        title={seoPages.skills.title}
+        description={seoPages.skills.description}
+        path={seoPages.skills.path}
+        keywords={seoPages.skills.keywords}
+      />
       <FloatingParticles />
       <GeometricShapes />
       <motion.div className={styles.hero} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
@@ -178,14 +186,15 @@ export default function SkillPage() {
           Мои навыки
         </motion.h1>
         <motion.p className={styles.subtitle} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}>
-          Стэк технологий, который я знаю и совершенствую
+          Языки программирования, уровни навыков, знания и умения — перечень всех
+          инструментов разработчика
         </motion.p>
       </motion.div>
       <div className={styles.skillsGrid}>
-        <SkillCategory title="Языки" skills={skills.languages} delay={0.3} />
+        <SkillCategory title="Языки программирования" skills={skills.languages} delay={0.3} />
         <SkillCategory title="Фреймворки" skills={skills.frameworks} delay={0.5} />
-        <SkillCategory title="Инструменты" skills={skills.tools} delay={0.7} />
-        <SkillCategory title="СУБД" skills={skills.databases} delay={0.9} />
+        <SkillCategory title="Все инструменты" skills={skills.tools} delay={0.7} />
+        <SkillCategory title="База данных" skills={skills.databases} delay={0.9} />
       </div>
     </div>
   );

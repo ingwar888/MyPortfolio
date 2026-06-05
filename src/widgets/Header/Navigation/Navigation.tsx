@@ -37,7 +37,9 @@ const Navigation: React.FC<LinkProps> = ({ links }) => {
         animate="visible"
       >
         {links.map((item) => {
-          const isActive = location.pathname === item.link;
+          const isActive =
+            location.pathname === item.link ||
+            (item.link === '/projects' && location.pathname.startsWith('/projects/'));
           return (
             <motion.li
               key={item.id}
